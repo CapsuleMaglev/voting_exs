@@ -3,7 +3,6 @@ defmodule Voting.Election do
   Election Schema
   """
   use Ecto.Schema
-  import Ecto.Changeset
   alias Voting.Admin
 
   schema "elections" do

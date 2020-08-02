@@ -26,6 +26,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :voting, VotingWeb.AuthAccessPipeline,
+  module: VotingWeb.Guardian,
+  error_handler: VotingWeb.AuthErrorHandler
+
 config :voting, VotingWeb.Guardian,
   issuer: "voting_web",
   secret_key: "J762+Rzo6o3xDdQ27MAffqzEkx14KmyXjXyt4g9p2T2abLnMa9O0BvXmPSycfUoO"
