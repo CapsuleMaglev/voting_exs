@@ -1,4 +1,4 @@
-defmodule VotingWeb.ElectionController do
+defmodule VotingWeb.Admin.ElectionController do
   use VotingWeb, :controller
 
   alias Voting.CreateElection
@@ -10,7 +10,7 @@ defmodule VotingWeb.ElectionController do
     case CreateElection.run(params) do
       {:ok, election} ->
         conn
-        |> put_status(422)
+        |> put_status(201)
         |> render("election.json", %{election: election})
 
       {:error, _} ->
