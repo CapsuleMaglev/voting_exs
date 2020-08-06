@@ -9,9 +9,8 @@ env:
   MIX_ENV: test
 
 jobs:
-  build:
-
-    name: Build and test
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +31,31 @@ jobs:
     - name: Install dependencies
       if: steps.mix-cache.outputs.cache-hit != 'true'
       run: mix deps.get
-    - name: Check Formatting
-      run: mix format --check-formatted
-    - name: Run Credo
-      run: mix credo --strict
     - name: Run tests
       run: mix test
+
+  formatting_and_lint:
+    name: Formatting and Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PostgreSQL
+        uses: Harmon758/postgresql-action@v1.0.0
+      - uses: actions/checkout@v2
+      - name: Set up Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          elixir-version: '1.10.3' # Define the elixir version [required]
+          otp-version: '22.3' # Define the OTP version [required]
+      - name: Restore dependencies cache
+        uses: actions/cache@v2
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        if: steps.mix-cache.outputs.cache-hit != 'true'
+        run: mix deps.get
+      - name: Check Formatting
+        run: mix format --check-formatted
+      - name: Run Credo
+        run: mix credo --strict
