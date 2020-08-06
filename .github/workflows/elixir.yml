@@ -39,6 +39,8 @@ jobs:
     - name: Install dependencies
       if: steps.mix-cache.outputs.cache-hit != 'true'
       run: mix deps.get
+    - name: Compile files
+      run: mix compile
     - name: Create and migrate database
       run: |
            mix ecto.create
@@ -46,8 +48,8 @@ jobs:
     - name: Run tests
       run: mix test
 
-  formatting_and_lint:
-    name: Formatting and Lint
+  format_and_lint:
+    name: Format and Lint
     runs-on: ubuntu-latest
     steps:
       - name: Setup PostgreSQL
@@ -75,6 +77,8 @@ jobs:
       - name: Install dependencies
         if: steps.mix-cache.outputs.cache-hit != 'true'
         run: mix deps.get
+      - name: Compile files
+        run: mix compile
       - name: Check Formatting
         run: mix format --check-formatted
       - name: Run Credo
