@@ -1,4 +1,7 @@
 defmodule VotingWeb.Guardian do
+  @moduledoc """
+  Guardian (authentication) class
+  """
   use Guardian, otp_app: :voting
 
   def subject_for_token(resource, _claims) do

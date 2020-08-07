@@ -1,4 +1,7 @@
 defmodule Voting.CreateElection do
+  @moduledoc """
+  Creation of election
+  """
   import Ecto.Changeset
   alias Voting.{Election, Repo}
 
