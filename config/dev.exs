@@ -7,7 +7,9 @@ config :voting, Voting.Repo,
   database: "voting_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 10,
+  AWS_ACCESS_KEY_ID: System.get_env("AWS_ACCESS_KEY_ID"),
+  AWS_SECRET_ACCESS_KEY: System.get_env("AWS_SECRET_ACCESS_KEY")
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

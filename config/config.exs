@@ -34,6 +34,12 @@ config :voting, VotingWeb.Guardian,
   issuer: "voting_web",
   secret_key: "J762+Rzo6o3xDdQ27MAffqzEkx14KmyXjXyt4g9p2T2abLnMa9O0BvXmPSycfUoO"
 
+config :ex_aws,
+  region: "us-east-2",
+  json_codec: Jason
+
+config :voting, uploads_bucket: "capsulemaglev-public", file_module: File
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
